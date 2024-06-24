@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'website/assets/css/styles.css' %}">
+    <title>Nutrition Intake Tracker</title>
+</head>
+    <h1>{{ message }}</h1>
+    <h1>{{ error }}</h1>
+
+    <section>
+        <h1 class="title">Nutritional Intake Tracker</h1>
+        <p class="button"><a href="/goals-summary">Goals Summary</a></p>
+
+        {% for nutrition_intake in nutrition_intakes %}
+        <form method="post">
+            <input type="text" id="exists" name="exists" value="true" readonly hidden>
+
+            {% csrf_token %}
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="{{ nutrition_intake.Date }}" required>
+
+            <label for="food-name">Food Name:</label>
+            <input type="text" id="food-name" name="food-name" value="{{ nutrition_intake.FoodName }}" required>
+
+            <label for="calories">Calories:</label>
+            <input type="number" id="calories" name="calories" step="0.01" value="{{ nutrition_intake.Calories }}" required><span>cal</span>
+
+            <label for="protein">Protein:</label>
+            <input type="number" id="protein" name="protein" step="0.01" value="{{ nutrition_intake.Protein }}" required><span>g</span>
+
+            <label for="fat">Fat:</label>
+            <input type="number" id="fat" name="fat" step="0.01" value="{{ nutrition_intake.Fat }}" required><span>g</span>
+
+            <label for="carbohydrates">Carbohydrates:</label>
+            <input type="number" id="carbohydrates" name="carbohydrates" step="0.01" value="{{ nutrition_intake.Carbohydrates }}" required><span>g</span>
+
+            <input type="submit" name="action" value="Submit">
+            <input type="submit" name="action" value="Delete">
+        </form>
+        {% endfor %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" id="exists" name="exists" value="false" readonly hidden>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="food-name">Food Name:</label>
+            <input type="text" id="food-name" name="food-name" required>
+
+            <label for="calories">Calories:</label>
+            <input type="number" id="calories" name="calories" step="0.01" required><span>cal</span>
+
+            <label for="protein">Protein:</label>
+            <input type="number" id="protein" name="protein" step="0.01" required><span>g</span>
+
+            <label for="fat">Fat:</label>
+            <input type="number" id="fat" name="fat" step="0.01" required><span>g</span>
+
+            <label for="carbohydrates">Carbohydrates:</label>
+            <input type="number" id="carbohydrates" name="carbohydrates" step="0.01" required><span>g</span>
+
+            <input type="submit" name="action" value="Submit">
+        </form>
+    </section>
+</body>
+<script src="{% static 'website/assets/js.main.js' %}"></script>
+</html>

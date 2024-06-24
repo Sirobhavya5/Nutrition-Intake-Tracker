@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+p.button {
+    width: 200px;
+    padding: 10px 25px;
+    background: #000;
+    border-radius: 5px;
+    text-align: center;
+    margin: 25px auto;
+}
+
+p.button a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+section {
+    text-align: center;
+    padding: 20px 0px;
+}
+
+form {
+    margin: 5px 0px;
+}
+
+form input[type="submit"] {
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: 800;
+}
+
+div.goals > h2 {
+    font-weight: 500;
+}
+
+div.summary > h2 {
+    font-weight: 800;
+}

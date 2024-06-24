@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'website/assets/css/styles.css' %}">
+    <title>View Goals</title>
+</head>
+<body>
+    <h1>{{ message }}</h1>
+    <h1>{{ error }}</h1>
+
+    <section>
+        <h1 class="title">Goals Summary</h1>
+        <p class="button"><a href="/">Home</a></p>
+
+        {% if goals_summary %}
+            <p class="button"><a href="/goals-summary">Perform <br>Re-Calculation</a></p>
+
+            <div class="goals">
+                <h2>Daily Calories Goal: 2500 cal</h2>
+                <h2>Daily Carbohydrates Goal: 325 g</h2>
+                <h2>Daily Fat Goal: 78 g</h2>
+                <h2>Daily Protein Goal: 60 g</h2>
+            </div>
+            <br>
+            <div class="summary">
+                <h2>Average Daily Calories: {{ goals_summary.calories }} ({{ goals_summary.calories_percentage }}) {{ goals_summary.calories_message }}</h2>
+                <h2>Average Daily Carbohydrates: {{ goals_summary.carbohydrates }} ({{ goals_summary.carbohydrates_percentage }}) {{ goals_summary.carbohydrates_message }}</h2>
+                <h2>Average Daily Fat: {{ goals_summary.fat }} ({{ goals_summary.fat_percentage }}) {{ goals_summary.fat_message }}</h2>
+                <h2>Average Daily Protein: {{ goals_summary.protein }} ({{ goals_summary.protein_percentage }}) {{ goals_summary.protein_message }}</h2>
+            </div>
+        {% elif unique_dates %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="start-date">Start Date:</label>
+            <select id="start-date" name="start-date">
+                <option value="">Select Start Date</option>
+                {% for unique_date in unique_dates %}
+                <option value="{{ unique_date }}">{{ unique_date }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="end_date">End Date:</label>
+            <select id="end-date" name="end-date">
+                <option value="">Select End Date</option>
+                {% for unique_date in unique_dates %}
+                <option value="{{ unique_date }}">{{ unique_date }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Calculate">
+        </form>
+        {% endif %}
+    </section>
+</body>
+<script src="{% static 'website/assets/main.js' %}"></script>
+</html>
